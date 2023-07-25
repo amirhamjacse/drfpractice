@@ -26,7 +26,35 @@ SECRET_KEY = 'django-insecure-g&gpe9sgc5xt$l&m6^n%z3&1g1nuuau0=nfp9qht+03p(f2)v2
 DEBUG = True
 
 ALLOWED_HOSTS = ['*']
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:5173',
+    # Add more allowed origins if needed
+]
 
+CORS_ALLOW_METHODS = (
+    "DELETE",
+    "GET",
+    "OPTIONS",
+    "PATCH",
+    "POST",
+    "PUT",
+)
+
+from corsheaders.defaults import default_methods
+
+CORS_ALLOW_METHODS = (
+    *default_methods,
+    "POKE",
+)
+
+CORS_ALLOW_HEADERS = (
+    "accept",
+    "authorization",
+    "content-type",
+    "user-agent",
+    "x-csrftoken",
+    "x-requested-with",
+)
 
 # Application definition
 
@@ -38,6 +66,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'studata',
+    'corsheaders',
     'rest_framework'
 
 ]
@@ -50,6 +79,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
 ]
 
 ROOT_URLCONF = 'studetsmanagement.urls'
