@@ -2,6 +2,7 @@ from .models import StudentInfo
 from .serializers import StudentsSerializer
 # from django.http import Http404
 from rest_framework.views import APIView
+from rest_framework import generics
 from rest_framework.response import Response
 from rest_framework import status
 
@@ -18,3 +19,12 @@ class StudentsList(APIView):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class StudentUpdateView(generics.UpdateAPIView):
+    queryset = StudentInfo.objects.all()
+    serializer_class = StudentsSerializer
+
+class StudentDeleteView(generics.DestroyAPIView):
+    queryset = StudentInfo.objects.all()
+    serializer_class = StudentsSerializer

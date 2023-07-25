@@ -21,4 +21,6 @@ from studata import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('slist/', views.StudentsList.as_view(), name='stulist'),
+    path('students/<int:pk>/', views.StudentUpdateView.as_view(), name='student-update'),
+    path('students/delete/<int:pk>/', views.StudentDeleteView.as_view(), name='student-delete'),
 ]
